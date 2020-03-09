@@ -1,5 +1,8 @@
 package rocks.zipcode.io.quiz3.arrays;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author leon on 09/12/2018.
  */
@@ -17,20 +20,30 @@ public class SquareArrayAnalyzer {
         if(inputArray.length != squaredValues.length)
             return false;
 
-        boolean flag = true;
-        if( squaredValues[0] == inputArray[squaredValues.length-1]*inputArray[squaredValues.length-1]) {
-            //check special condition
-            for (int i = 1; i < squaredValues.length; i++) {
-                if(squaredValues[i] != inputArray[i-1]*inputArray[i-1]){
-                    return false;
-                }
-            }
-        }else {
-            for (int i = 0; i < squaredValues.length; i++) {
-                if (squaredValues[i] != inputArray[i] * inputArray[i])
-                    return false;
-            }
+        Set<Integer> SQset = new HashSet<>();
+
+        for(Integer in:squaredValues){
+            SQset.add((int) Math.sqrt(in));
         }
+
+        for(Integer in:inputArray){
+            if(!SQset.contains(in))
+                return false;
+        }
+//        boolean flag = true;
+//        if( squaredValues[0] == inputArray[squaredValues.length-1]*inputArray[squaredValues.length-1]) {
+//            //check special condition
+//            for (int i = 1; i < squaredValues.length; i++) {
+//                if(squaredValues[i] != inputArray[i-1]*inputArray[i-1]){
+//                    return false;
+//                }
+//            }
+//        }else {
+//            for (int i = 0; i < squaredValues.length; i++) {
+//                if (squaredValues[i] != inputArray[i] * inputArray[i])
+//                    return false;
+//            }
+//        }
         return true;
     }
 }
